@@ -10,7 +10,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.feature_extraction.text import TfidfVectorizer
-import pandas as pd
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
 # pip install sklearn.model
@@ -23,17 +22,22 @@ import rhinoMorph
 # 다른 데이터셋 로드
 import json
 
+#ROOT_PATH = "/home/happytuk/workspace/python_text_sentiment/data"
+ROOT_PATH = "D:\\workspace/python_project/KoBERT_music_recomendation/data"
+targetFilelink = f"{ROOT_PATH}/ratings_morphed.txt"
+
 def read_data(filename):
-    with open(filename, 'r', encoding="cp949") as f:
+    with open(filename, 'r', encoding = "cp949") as f:
         data = [line.split('\t') for line in f.read().splitlines()]
         data = data[1:]
     return data
 
-data = read_data(r'D:\\workspace/python_project/KoBERT_music_recomendation/data/ratings_morphed.txt')
+print ("targetFilelink==>" + targetFilelink)
+# 문자열 앞 r은 Raw String을 뜻한다. 이스케이프 문자열을 그대로 출력하거나, json, html과 같은 문서에서 특수문자나 태그등을 변환하지 않고 그대로 사용할 목적이라면 스트링 앞에 r을 붙여 사용한다.
+#data = read_data(r'D:\\workspace/python_project/KoBERT_music_recomendation/data/ratings_morphed.txt')
+data = read_data(rf'{targetFilelink}')
 data_text  = [line[1] for line in data]    
 data_senti = [line[2] for line in data]
-
-
 
 # with open('D:\\workspace/python_project/KoBERT_music_recomendation/data/SentiWord_info.json', encoding='utf-8-sig', mode='r') as f: 
 #   SentiWord_info = json.load(f)
@@ -96,15 +100,12 @@ server = Flask(__name__)
 def home():
    return 'This is Home!'
 
-@server.route('/tokken')
-def tokken():
+@server.route('/sentiment')
+def sentiment():
     # for arg in sys.argv:
-    print(request.values.get('text'))
-
+    #print(request.values.get('text'))
     params = request.values.get('text')
-
     #xx = default.main(vect, grid, request.values.get('text'))
-    
     new_input = params
 
     # 입력 데이터 형태소 분석하기
@@ -114,18 +115,16 @@ def tokken():
     inputdata.append(morphed_input)             # 분석 결과를 리스트로 만들기
     X_input = vect.transform(inputdata)
 
-    print(X_input)
-
+    # print(X_input)
     result = grid.predict(X_input)  # 0은 부정, 1은 긍정
     
-    print('교차 검증 점수:', scores)
-    print('교차 검증 점수 평균:', scores.mean())
-    print("최고 교차 검증 점수:", round(grid.best_score_, 3))
-    print("최적의 매개변수:", grid.best_params_)
-
-    print(result)
-    
+    # print('교차 검증 점수:', scores)
+    # print('교차 검증 점수 평균:', scores.mean())
+    # print("최고 교차 검증 점수:", round(grid.best_score_, 3))
+    # print("최적의 매개변수:", grid.best_params_)
+    # print(result)
     # print(type(result))
+
     resultMessage = ""
     resultCode = 2
     
@@ -136,7 +135,7 @@ def tokken():
 
     elif result[0] == '0':
         print(f"{new_input}::{result[0]}: 부정")
-        resultMessage = "부정2"
+        resultMessage = "부정"
         resultCode = result[0]
 
     else:
@@ -148,4 +147,4 @@ def tokken():
     return { 'text': params, 'resultCode': f"{resultCode}", 'resultMessage': resultMessage }
 
 if __name__ == '__main__':  
-    server.run('0.0.0.0',port=5000,debug=True)
+    server.run('0.0.0.0', port=5000, debug=True)

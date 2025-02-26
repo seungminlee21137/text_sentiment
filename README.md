@@ -2,6 +2,19 @@
 
 테스트감정분석프로젝트
 
+# pip install
+
+=====================================================
+matplotlib 3.10.0
+Flask 3.1.0
+seaborn 0.13.2
+pandas 2.2.3
+sklearn-model 0.0.6
+numpy 1.26.2
+jpype1 1.5.2
+rhinoMorph 4.0.4
+=====================================================
+
 absl-py 2.1.0
 accelerate 1.4.0
 aiohttp 3.9.1
@@ -29,7 +42,6 @@ entrypoints 0.4
 Faker 36.1.1
 favicon 0.7.0
 filelock 3.17.0
-Flask 3.1.0
 flatbuffers 25.2.10
 fonttools 4.56.0
 frozenlist 1.4.0
@@ -53,7 +65,7 @@ importlib 1.0.4
 itsdangerous 2.2.0
 Jinja2 3.1.5
 joblib 1.4.2
-jpype1 1.5.2
+
 jsonpatch 1.33
 jsonpointer 2.4
 jsonschema 4.23.0
@@ -72,7 +84,7 @@ markdown-it-py 3.0.0
 markdownlit 0.0.7
 MarkupSafe 3.0.2
 marshmallow 3.20.1
-matplotlib 3.10.0
+
 mdurl 0.1.2
 ml-dtypes 0.4.1
 mpmath 1.3.0
@@ -82,13 +94,13 @@ named 1.4.1
 namex 0.0.8
 narwhals 1.27.1
 networkx 3.4.2
-numpy 1.26.2
+
 openai 1.3.5
 opt_einsum 3.4.0
 optree 0.14.0
 outcome 1.3.0.post0
 packaging 23.2
-pandas 2.2.3
+
 pd 0.0.4
 pefile 2023.2.7
 pillow 11.1.0
@@ -121,18 +133,16 @@ PyYAML 6.0.1
 referencing 0.36.2
 regex 2024.11.6
 requests 2.31.0
-rhinoMorph 4.0.4
 rich 13.9.4
 rpds-py 0.23.1
 safetensors 0.5.2
 scikit-learn 1.6.1
 scipy 1.15.2
-seaborn 0.13.2
 selenium 4.16.0
 sentencepiece 0.2.0
 setuptools 69.1.1
 six 1.17.0
-sklearn-model 0.0.6
+
 smmap 5.0.2
 sniffio 1.3.0
 solus 1.2.2
